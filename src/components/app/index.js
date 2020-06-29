@@ -1,15 +1,10 @@
-import React, {
-  useState,
-  useReducer,
-  useContext,
-  useEffect 
-} from "react";
-import {AppContext} from "components/app-context";
+import React, { useState, useReducer, useContext, useEffect } from "react";
+import { AppContext } from "components/app-context";
 import shuffle from "lodash.shuffle";
-import {ACTIONS} from "actions";
-import {rootReducer, initialState} from "store";
-import {TeamMembers} from "components/home-view";
-import {StartStandup} from "components/timer-view";
+import { ACTIONS } from "actions";
+import { rootReducer, initialState } from "store";
+import { TeamMembers } from "components/home-view";
+import { StartStandup } from "components/timer-view";
 function App() {
   const store = useReducer(rootReducer, initialState);
 
@@ -20,7 +15,8 @@ function App() {
       const dispatch = store[1];
       const count = Object.values(teamMembers).length;
       const ids = Object.keys(teamMembers);
-      const timePerMember = Math.floor(initialState.totalStandupTime / count);
+      const timePerMember =
+        count > 0 ? Math.floor(initialState.totalStandupTime / count) : 0;
       dispatch({
         type: ACTIONS.INIT_TEAM_MEMBERS,
         teamMembers,
@@ -35,7 +31,6 @@ function App() {
       <AppContext.Provider value={store}>
         <div className="flex items-center justify-center">
           <TeamMembers />
-          <StartStandup />
         </div>
       </AppContext.Provider>
     </div>

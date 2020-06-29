@@ -18,19 +18,12 @@ export function rootReducer(state, action) {
         order: action.order,
       };
     }
-    case ACTIONS.ADD_TEAM_MEMBER: {
+    case ACTIONS.UPDATE_TEAM_MEMBERS: {
       return {
         ...state,
         timePerMember: action.timePerMember,
         order: action.order,
-        teamMembers: {
-          ...state.teamMembers,
-          [action.id]: {
-            id: action.id,
-            name: action.name,
-            completed: action.completed,
-          },
-        },
+        teamMembers: action.teamMembers,
       };
     }
     default:
