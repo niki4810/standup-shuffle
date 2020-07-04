@@ -52,7 +52,8 @@ export function TeamMembers() {
   function handleStartStandup() {
     dispatch({
       type: ACTIONS.CHANGE_VIEW,
-      view: VIEWS.START_STANDUP
+      view: VIEWS.START_STANDUP,
+      standupStartTime: Date.now()
     });
   }
 

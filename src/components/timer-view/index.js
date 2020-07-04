@@ -53,6 +53,7 @@ export function StartStandup() {
     dispatch({
       type: ACTIONS.CHANGE_VIEW,
       view: VIEWS.SUMMARY,
+      standupEndTime: Date.now()
     });
   }
 

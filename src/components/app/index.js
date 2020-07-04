@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext, useEffect } from "react";
+import React, { useState, useReducer} from "react";
 import { AppContext } from "components/app-context";
 import shuffle from "lodash.shuffle";
 import { ACTIONS } from "actions";
@@ -6,6 +6,8 @@ import { VIEWS } from "enums";
 import { rootReducer, initialState } from "store";
 import { TeamMembers } from "components/home-view";
 import { StartStandup } from "components/timer-view";
+import {SummaryView} from "components/summary-view";
+
 function App() {
   const store = useReducer(rootReducer, initialState);
   const [state] = store;
@@ -33,7 +35,7 @@ function App() {
   let child;
   switch (currentView) {
     case VIEWS.SUMMARY:
-      child = "Summary View";
+      child = <SummaryView />;
       break;
     case VIEWS.START_STANDUP:
       child = <StartStandup />;
