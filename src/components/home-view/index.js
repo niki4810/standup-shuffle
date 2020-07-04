@@ -66,7 +66,7 @@ export function TeamMembers() {
     <div className="flex flex-column items-start justify-center">      
       <form
         onSubmit={handleAddTeamMember}
-        className="flex items-start justify-center flex-nowrap w-100"
+        className="flex items-start justify-center-ns flex-nowrap-ns w-100"
       >
         <input
           type="text"
@@ -81,20 +81,22 @@ export function TeamMembers() {
           )}
           disabled={!name || name === ""}
         >
-          Add Team Member
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          {/* Add Team Member */}
         </Button>
       </form>
-      <div className="mv2 flex">
+      <div className="mv2 flex flex-column flex-row-ns">
         <span className="b mr2 underline">Total Standup Time:</span>
-        <span className="mr2">
+        <span className="mr2 mb3 mb0-ns">
           {prettyMilliseconds(state.totalStandupTime, { verbose: true })}
         </span>
         <span className="b mr2 underline">Time per member:</span>
-        <span className="mr2">
+        <span className="mr2 mb3 mb0-ns">
           {prettyMilliseconds(state.timePerMember, { verbose: true })}
         </span>
       </div>
       {/* h5 overflow-y-auto w-100 */}
+      <div className="b mt3 underline">Members:</div>
       <ul className="pl0 list">
         {members.map((member) => {
           return (
