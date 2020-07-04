@@ -113,6 +113,7 @@ export function TeamMembers() {
         })}
       </ul>
       <Button
+        className="center"
         onClick={handleStartStandup}
         >
         {buttonText}

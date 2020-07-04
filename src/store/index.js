@@ -11,6 +11,12 @@ export const initialState = {
 
 export function rootReducer(state, action) {
   switch (action.type) {
+    case ACTIONS.SHUFFLE_MEMBERS: {
+      return {
+        ...state,
+        order: action.order
+      };
+    }
     case ACTIONS.CHANGE_VIEW: {
       return {
         ...state,

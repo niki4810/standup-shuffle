@@ -46,7 +46,7 @@ function App() {
     <div className="app pa4 mr2 flex">
       <AppContext.Provider value={store}>
         <div className="flex flex-column items-center justify-center ba b--white pa4">
-          <div className="f1 center mb4">
+          <div className="f1 center mb4 bb b--white pb3">
             Standup
             <span
               role="img"
