@@ -39,7 +39,7 @@ export function StartStandup() {
   const memberId = order[currentIndex];
   const member = teamMembers[memberId];
   const isLastMember = currentIndex === order.length - 1;
-
+  const isFirstMember = currentIndex === 0;
 
   function handleRestartStandup() {
     dispatch({
@@ -61,15 +61,25 @@ export function StartStandup() {
     setCurrentIndex(currentIndex + 1);
   }
 
+  function handlePreviousClick() {
+    setCurrentIndex(currentIndex - 1);
+  }
+
+  const countLabel = `${currentIndex + 1} of ${order.length}`;
+
   return (
     <div className="flex flex-column items-center justify-center">
       <div className="f1">{member.name}</div>
       <Timer key={memberId} startTime={timePerMember} />
+      <div>{countLabel}</div>
       <div className="flex mt4">
-        <Button onClick={handleRestartStandup}>Restart Standup</Button>
+        <Button onClick={handleRestartStandup}>
+        <i className="fa fa-repeat" aria-hidden="true"></i>
+        </Button>
+        <Button onClick={handlePreviousClick} disabled={isFirstMember}>Previous</Button>
         {!isLastMember && <Button onClick={handleNextClick}>Next</Button>}
         {isLastMember && (
-          <Button onClick={handleEndStandup}>End Standup</Button>
+          <Button onClick={handleEndStandup}>End</Button>
         )}
       </div>
     </div>

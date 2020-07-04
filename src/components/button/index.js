@@ -2,8 +2,12 @@ import React from "react";
 import classNames from "classnames";
 export const Button = (props) => {
   const classes = classNames(
-    "f6 link dim br1 ph3 pv2 mb2 mh2 dib white bg-purple pointer",
-    props.className
+    "f6 link br1 ph3 pv2 mb2 mh2 dib white bg-purple pointer noselect",
+    props.className,
+    {
+      "o-50": props.disabled,
+      "dim": !props.disabled
+    }
   );
   return (
     <button 

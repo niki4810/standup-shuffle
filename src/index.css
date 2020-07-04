@@ -20,3 +20,7 @@ body {
   75% {opacity: 0.75;}
   100% {opacity: 1;}
 }
+
+.noselect {
+  user-select: none;
+}
