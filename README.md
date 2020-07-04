@@ -1,6 +1,22 @@
+# Standup 🔀 Shuffle 
+
+A simple app to manage your daily standup meetings  🔀
+
+Features:
+- Add/Remove team members. Team members are persisted in your browsers localstorage.
+- Setting total standup time.
+- Calculate time for each member.
+- Shuffle the order of team members when standup starts.
+- Indicate a timer for each team member during standup.
+- Summarize your daily standup meeting.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Demo
+
+Demo app can be viewed [here](#).
+
+# Development:
 
 In the project directory, you can run:
 
