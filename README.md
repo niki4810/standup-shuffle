@@ -4,7 +4,11 @@ A simple app to manage your daily standup meetings  🔀
 
 ![demo](https://user-images.githubusercontent.com/1467801/86507382-a59fb600-bd8c-11ea-803a-c73053667295.gif)
 
-Features:
+# Demo
+
+Demo app can be viewed [here](#).
+
+# Features:
 - Add/Remove team members. Team members are persisted in your browsers localstorage.
 - Setting total standup time.
 - Calculate time for each member.
@@ -12,9 +16,6 @@ Features:
 - Indicate a timer for each team member during standup.
 - Summarize your daily standup meeting.
 
-# Demo
-
-Demo app can be viewed [here](#).
 
 # Development:
 
