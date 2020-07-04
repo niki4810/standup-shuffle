@@ -4,20 +4,31 @@ import { Button } from "components/button";
 import { ACTIONS } from "actions";
 import { VIEWS } from "enums";
 import prettyMilliseconds from "pretty-ms";
+import classNames from "classnames";
 
 function Timer({ startTime }) {
   const [time, setTime] = useState(startTime);
 
   useEffect(() => {
     let timeout = setTimeout(() => {
-      setTime(time - 1000);
+      if (time <= 0) {
+        clearTimeout(timeout);
+      } else {
+        setTime(time - 1000);
+      }
     }, 1000);
     return () => {
       clearTimeout(timeout);
     };
   }, [time]);
 
-  return <div className="pa3 mv2 f2">{prettyMilliseconds(time)}</div>;
+  const classes = classNames("pa3 mv2 f2", {blink: time === 0});
+
+  return (
+    <div className={classes}>
+      {prettyMilliseconds(time, { colonNotation: true })}
+    </div>
+  );
 }
 
 export function StartStandup() {

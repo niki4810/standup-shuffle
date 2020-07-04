@@ -8,3 +8,15 @@ body {
   background-color: #282c34;
   color: white;
 }
+
+.blink {
+  animation: flash 0.5s infinite;
+}
+
+@keyframes flash {
+  0% {opacity: 0;}
+  25% {opacity: 0.25;}
+  50% {opacity: 0.5;}
+  75% {opacity: 0.75;}
+  100% {opacity: 1;}
+}
