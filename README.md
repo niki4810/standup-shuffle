@@ -6,7 +6,7 @@ A simple app to manage your daily standup meetings  🔀
 
 # Demo
 
-Demo app can be viewed [here](#).
+Demo app can be viewed [here](https://standup-shuffle.netlify.app/).
 
 # Features:
 - Add/Remove team members. Team members are persisted in your browsers localstorage.
