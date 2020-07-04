@@ -23,7 +23,7 @@ function Timer({ startTime }) {
     };
   }, [time]);
 
-  const classes = classNames("pa3 mv2 f2", {blink: time === 0});
+  const classes = classNames("pa3 mv2 f2", { blink: time === 0 });
 
   return (
     <div className={classes}>
@@ -45,7 +45,7 @@ export function StartStandup() {
     dispatch({
       type: ACTIONS.CHANGE_VIEW,
       view: VIEWS.ADD_MEMBERS,
-      order: shuffle(order)
+      order: shuffle(order),
     });
   }
 
@@ -53,7 +53,7 @@ export function StartStandup() {
     dispatch({
       type: ACTIONS.CHANGE_VIEW,
       view: VIEWS.SUMMARY,
-      standupEndTime: Date.now()
+      standupEndTime: Date.now(),
     });
   }
 
@@ -73,14 +73,14 @@ export function StartStandup() {
       <Timer key={memberId} startTime={timePerMember} />
       <div>{countLabel}</div>
       <div className="flex mt4">
-        <Button onClick={handleRestartStandup}>
-        <i className="fa fa-repeat" aria-hidden="true"></i>
+        <Button title="Restart standup" onClick={handleRestartStandup}>
+          <i className="fa fa-repeat" aria-hidden="true"></i>
         </Button>
-        <Button onClick={handlePreviousClick} disabled={isFirstMember}>Previous</Button>
-        {!isLastMember && <Button onClick={handleNextClick}>Next</Button>}
-        {isLastMember && (
-          <Button onClick={handleEndStandup}>End</Button>
-        )}
+        <Button title="Previous Member" onClick={handlePreviousClick} disabled={isFirstMember}>
+          Previous
+        </Button>
+        {!isLastMember && <Button title="Next Member" onClick={handleNextClick}>Next</Button>}
+        {isLastMember && <Button title="End Standup" onClick={handleEndStandup}>End</Button>}
       </div>
     </div>
   );
