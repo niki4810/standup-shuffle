@@ -18,8 +18,10 @@ export function rootReducer(state, action) {
       };
     }
     case ACTIONS.CHANGE_VIEW: {
+      const order = action.order || state.order;
       return {
         ...state,
+        order,
         currentView: action.view
       };
     }

@@ -5,6 +5,7 @@ import { ACTIONS } from "actions";
 import { VIEWS } from "enums";
 import prettyMilliseconds from "pretty-ms";
 import classNames from "classnames";
+import shuffle from "lodash.shuffle";
 
 function Timer({ startTime }) {
   const [time, setTime] = useState(startTime);
@@ -39,19 +40,20 @@ export function StartStandup() {
   const member = teamMembers[memberId];
   const isLastMember = currentIndex === order.length - 1;
 
-  function changeView(view = VIEWS.ADD_MEMBERS) {
+
+  function handleRestartStandup() {
     dispatch({
       type: ACTIONS.CHANGE_VIEW,
-      view,
+      view: VIEWS.ADD_MEMBERS,
+      order: shuffle(order)
     });
   }
 
-  function handleRestartStandup() {
-    changeView();
-  }
-
   function handleEndStandup() {
-    changeView(VIEWS.SUMMARY);
+    dispatch({
+      type: ACTIONS.CHANGE_VIEW,
+      view: VIEWS.SUMMARY,
+    });
   }
 
   function handleNextClick() {
