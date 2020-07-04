@@ -3,12 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import classNames from "classnames";
 import { AppContext } from "components/app-context";
 import { ACTIONS } from "actions";
+import {VIEWS} from "enums";
 import shuffle from "lodash.shuffle";
 import prettyMilliseconds from "pretty-ms";
 import {
   addTeamMemberToLocalStorage,
   removeTeamMemberFromLocalStorage
 } from "utils";
+import {Button} from "components/button";
 
 export function TeamMembers() {
   const [name, setName] = useState("");
@@ -18,6 +20,7 @@ export function TeamMembers() {
   function handleNameChange(ev) {
     setName(ev.target.value);
   }
+
   function updateTeamMembers(teamMembers) {
     const count = Object.values(teamMembers).length;
     const timePerMember = count > 0 
@@ -46,23 +49,20 @@ export function TeamMembers() {
     updateTeamMembers(teamMembers);
   }
 
+  function handleStartStandup() {
+    dispatch({
+      type: ACTIONS.CHANGE_VIEW,
+      view: VIEWS.START_STANDUP
+    });
+  }
+
   const members = Object.values(teamMembers);
   let buttonText = "Start standup";
   if(members.length > 0) {
     buttonText = `${buttonText} with ${members.length} member${members.length === 1 ? "" : "s"}`;
   }
   return (
-    <div className="flex flex-column items-start justify-center ba b--white pa4">
-      <div className="f1 center mb4">
-        Standup 
-        <span
-          role="img"
-          aria-label="shuffle"
-          className="fa fa-random bg-purple white mr2 ml2 pa2"
-          aria-hidden="true">
-        </span>
-        Shuffle
-      </div>
+    <div className="flex flex-column items-start justify-center">      
       <form
         onSubmit={handleAddTeamMember}
         className="flex items-start justify-center flex-nowrap w-100"
@@ -74,15 +74,14 @@ export function TeamMembers() {
           value={name}
           onChange={handleNameChange}
         />
-        <button
+        <Button
           className={classNames(
-            "f6 link dim br1 ph3 pv2 mb2 dib white bg-purple",
             { disabled: !name || name === "" }
           )}
           disabled={!name || name === ""}
         >
           Add Team Member
-        </button>
+        </Button>
       </form>
       <div className="mv2 flex">
         <span className="b mr2 underline">Total Standup Time:</span>
@@ -113,9 +112,11 @@ export function TeamMembers() {
           );
         })}
       </ul>
-      <button className="f6 link dim br1 ph3 pv2 mb2 dib white bg-purple center pointer">
+      <Button
+        onClick={handleStartStandup}
+        >
         {buttonText}
-      </button>
+      </Button>
     </div>
   );
 }

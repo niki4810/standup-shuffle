@@ -1,44 +1,46 @@
-import React, {useContext, useState} from "react";
-import {AppContext} from "components/app-context";
-
-export function CurrentMember() {
-  const [state] = useContext(AppContext);
-  const { order = [], teamMembers = {}, timePerMember } = state;
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const { name, id } = teamMembers[order[currentIndex]] || {};
-  const [remaningTime, setRemaningTime] = useState(timePerMember);
-  setTimeout(() => {
-    setRemaningTime(remaningTime - 1);
-  }, timePerMember);
-  return (
-    <>
-      <div>{name}</div>
-      <div>Time remaining: {remaningTime}</div>
-    </>
-  );
-}
+import React, { useContext, useState } from "react";
+import { AppContext } from "components/app-context";
+import { Button } from "components/button";
+import { ACTIONS } from "actions";
+import { VIEWS } from "enums";
 
 export function StartStandup() {
-  const [start, setStart] = useState(false);
+  const [state, dispatch] = useContext(AppContext);
+  const { teamMembers, order } = state;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const memberId = order[currentIndex];
+  const member = teamMembers[memberId];
+  const isLastMember = currentIndex === order.length - 1;
+
+  function changeView(view = VIEWS.ADD_MEMBERS) {
+    dispatch({
+      type: ACTIONS.CHANGE_VIEW,
+      view,
+    });
+  }
+
+  function handleRestartStandup() {
+    changeView();
+  }
+
+  function handleEndStandup() {
+    changeView(VIEWS.SUMMARY);
+  }
+
+  function handleNextClick() {
+    setCurrentIndex(currentIndex + 1);
+  }
+
   return (
-    <div>
-      {!start && (
-        <button
-          className="f6 link dim br1 ph3 pv2 mb2 dib white bg-purple"
-          onClick={() => setStart(true)}
-        >
-          Start Standup
-        </button>
-      )}
-      {start && <CurrentMember />}
-      {start && (
-        <button
-          className="f6 link dim br1 ph3 pv2 mb2 dib white bg-purple"
-          onClick={() => setStart(false)}
-        >
-          reset
-        </button>
-      )}
+    <div className="flex flex-column items-center justify-center">
+      <div className="f1">{member.name}</div>
+      <div className="flex mt4">
+        <Button onClick={handleRestartStandup}>Restart Standup</Button>
+        {!isLastMember && <Button onClick={handleNextClick}>Next</Button>}
+        {isLastMember && (
+          <Button onClick={handleEndStandup}>End Standup</Button>
+        )}
+      </div>
     </div>
   );
 }

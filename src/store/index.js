@@ -1,29 +1,28 @@
 import {ACTIONS} from "actions";
+import {VIEWS} from "enums";
 
 export const initialState = {
   teamMembers: {},
   order: [],
-  // totalStandupTime: 900000, // 15 mins (or) 900 seconds (or) 900,000 milli seconds
   totalStandupTime: 120000,
   timePerMember: 0,
+  currentView: VIEWS.ADD_MEMBERS
 };
 
 export function rootReducer(state, action) {
   switch (action.type) {
-    case ACTIONS.INIT_TEAM_MEMBERS: {
+    case ACTIONS.CHANGE_VIEW: {
       return {
         ...state,
-        teamMembers: action.teamMembers,
-        timePerMember: action.timePerMember,
-        order: action.order,
+        currentView: action.view
       };
     }
     case ACTIONS.UPDATE_TEAM_MEMBERS: {
       return {
         ...state,
-        timePerMember: action.timePerMember,
         order: action.order,
         teamMembers: action.teamMembers,
+        timePerMember: action.timePerMember,
       };
     }
     default:
