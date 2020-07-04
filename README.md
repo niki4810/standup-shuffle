@@ -12,15 +12,13 @@ Features:
 - Indicate a timer for each team member during standup.
 - Summarize your daily standup meeting.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 # Demo
 
 Demo app can be viewed [here](#).
 
 # Development:
 
-In the project directory, you can run:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). In the project directory, you can run:
 
 ### `yarn start`
 
