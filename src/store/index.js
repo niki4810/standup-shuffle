@@ -44,6 +44,13 @@ export function changeViewReducer(state, action) {
 
 export function rootReducer(state, action) {
   switch (action.type) {
+    case ACTIONS.SET_STANDUP_TIME: {
+      return {
+        ...state,
+        totalStandupTime: action.totalStandupTime,
+        timePerMember: action.timePerMember
+      };
+    }
     case ACTIONS.SHUFFLE_MEMBERS: {
       return {
         ...state,
@@ -59,6 +66,7 @@ export function rootReducer(state, action) {
         order: action.order,
         teamMembers: action.teamMembers,
         timePerMember: action.timePerMember,
+        totalStandupTime: action.totalStandupTime || state.totalStandupTime
       };
     }
     default:

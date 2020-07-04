@@ -13,21 +13,26 @@ function App() {
   const [state] = store;
 
   useState(() => {
-    const data = localStorage.getItem("teamMembers");
+    const data = localStorage.getItem("teamMembers");    
     if (data) {
       const teamMembers = JSON.parse(data);
       const dispatch = store[1];
       const count = Object.values(teamMembers).length;
       const ids = Object.keys(teamMembers);
+      const totalStandupTime  = localStorage.getItem("totalStandupTime") || initialState.totalStandupTime;
       const timePerMember =
-        count > 0 ? Math.floor(initialState.totalStandupTime / count) : 0;
+        count > 0 ? Math.floor(totalStandupTime / count) : 0;
+
+
       dispatch({
         type: ACTIONS.UPDATE_TEAM_MEMBERS,
         teamMembers,
         timePerMember,
+        totalStandupTime: parseInt(totalStandupTime),
         order: shuffle(ids),
       });
     }
+    
   }, []);
 
   const { currentView = VIEWS.ADD_MEMBERS } = state;
