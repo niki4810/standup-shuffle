@@ -69,7 +69,7 @@ export function StartStandup() {
 
   return (
     <div className="flex flex-column items-center justify-center">
-      <div className="f1">{member.name}</div>
+      <div className="f3 f1-ns">{member.name}</div>
       <Timer key={memberId} startTime={timePerMember} />
       <div>{countLabel}</div>
       <div className="flex mt4">
