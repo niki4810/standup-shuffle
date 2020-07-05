@@ -2,7 +2,7 @@
 
 A simple app to manage your daily standup meetings  🔀
 
-![demo](https://user-images.githubusercontent.com/1467801/86507382-a59fb600-bd8c-11ea-803a-c73053667295.gif)
+![demo-ss-2](https://user-images.githubusercontent.com/1467801/86539154-4be3dc80-beaf-11ea-8595-d82b8a5e2942.gif)
 
 # Demo
 
