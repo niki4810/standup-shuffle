@@ -27,7 +27,7 @@ function Timer({ startTime }) {
 
   return (
     <div className={classes}>
-      {prettyMilliseconds(time, { colonNotation: true })}
+      {prettyMilliseconds(time)}
     </div>
   );
 }

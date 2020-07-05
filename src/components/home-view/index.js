@@ -84,7 +84,7 @@ export function TeamMembers() {
   const timeInMins = parseMilliSeconds(state.totalStandupTime).minutes;
 
   return (
-    <div className="flex flex-column items-start justify-center">
+    <div className="flex flex-column items-start justify-center w-100">
       <form
         onSubmit={handleAddTeamMember}
         className="flex items-start justify-center-ns flex-nowrap-ns w-100"
@@ -103,48 +103,66 @@ export function TeamMembers() {
           <i className="fa fa-plus" aria-hidden="true"></i>
         </Button>
       </form>
-      <div className="mv2 flex flex-column flex-row-ns items-center">
-        <span className="b mr2 underline">Total Standup Time:</span>
-        <span className="mr2 mb3 mb0-ns">
-          <input
-            type="number"
-            value={timeInMins}
-            min={2}
-            max={30}
-            onChange={handleStandupTimeChange}
-          />{" "}
-          minutes.
-        </span>
-        <span className="b mr2 underline">Time per member:</span>
-        <span className="mr2 mb3 mb0-ns">
-          {prettyMilliseconds(state.timePerMember, { verbose: true })}
-        </span>
+      <div className="flex flex-row pv3 w-100">
+        <div className="mr2 pr2 br b--white flex-auto">
+          {/* h5 overflow-y-auto w-100 */}
+          <div className="b underline">
+            Members
+            <i class="fa fa-users ml2" aria-hidden="true"></i>
+          </div>
+          <ul className="pl0 list">
+            {members.length === 0 && (
+              <div className="mb2 pv1">No members yet.</div>
+            )}
+            {members.map((member) => {
+              return (
+                <li
+                  className="mb2 pv1 flex items-center justify-start"
+                  key={member.id}
+                >
+                  <span
+                    onClick={() => {
+                      handleRemoveTeamMember(member.id);
+                    }}
+                    role="img"
+                    aria-label={`remove ${member.name}`}
+                    className="mr3 pointer fa fa-times bg-purple white pa1"
+                    aria-hidden="true"
+                    title={`remove ${member.name}`}
+                  ></span>
+                  <span>{member.name}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="flex pl2 flex-column">
+          <div className="b mb3 underline">
+            Settings
+            <i class="fa fa-cog ml2" aria-hidden="true"></i>
+          </div>
+          <div className="mb3 i underline">Total Standup Time:</div>
+          <div className="mb3">
+            <input
+              type="number"
+              value={timeInMins}
+              min={2}
+              max={30}
+              onChange={handleStandupTimeChange}
+            />{" "}
+            minutes.
+          </div>
+          <div className="mb3 i underline">Time per member:</div>
+          <div className="mb3">
+            {prettyMilliseconds(state.timePerMember, { verbose: true })}
+          </div>
+        </div>
       </div>
-      {/* h5 overflow-y-auto w-100 */}
-      {members.length > 0 && <div className="b mt3 underline">Members:</div>}
-      <ul className="pl0 list">
-        {members.map((member) => {
-          return (
-            <li
-              className="mb2 pv1 flex items-center justify-start"
-              key={member.id}
-            >
-              <span
-                onClick={() => {
-                  handleRemoveTeamMember(member.id);
-                }}
-                role="img"
-                aria-label={`remove ${member.name}`}
-                className="mr3 pointer fa fa-times bg-purple white pa1"
-                aria-hidden="true"
-                title={`remove ${member.name}`}
-              ></span>
-              <span>{member.name}</span>
-            </li>
-          );
-        })}
-      </ul>
-      <Button className="center" onClick={handleStartStandup}>
+      <Button
+        disabled={members.length === 0}
+        className="center"
+        onClick={handleStartStandup}
+      >
         {buttonText}
       </Button>
     </div>
