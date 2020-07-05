@@ -59,16 +59,17 @@ export function TeamMembers() {
   }
 
   function handleStandupTimeChange(ev) {
-    debugger;
-    const totalStandupTime = toMilliseconds({ minutes: parseInt(ev.target.value) });
+    const { target } = ev;
+    let { value } = target;
+    value = !value || value === "" ? 2 : value;
+    const totalStandupTime = toMilliseconds({ minutes: parseInt(value) });
     localStorage.setItem("totalStandupTime", totalStandupTime);
     const count = Object.values(teamMembers).length;
-    const timePerMember =
-      count > 0 ? Math.floor(totalStandupTime / count) : 0;
+    const timePerMember = count > 0 ? Math.floor(totalStandupTime / count) : 0;
     dispatch({
       type: ACTIONS.SET_STANDUP_TIME,
       totalStandupTime,
-      timePerMember
+      timePerMember,
     });
   }
 
